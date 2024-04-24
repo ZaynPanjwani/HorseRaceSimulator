@@ -17,5 +17,22 @@ public class HorseLanes extends JPanel {
         this.setPreferredSize(new Dimension((int) (Main.getRaceUI().getWidth()*0.8), (int) (Main.getRaceUI().getHeight()*0.7)));
 
         this.setVisible(true);
+
+        this.updateLanes(numOfLanes);
+
+    }
+
+    public void updateLanes(int numOfLanes) {
+        this.horses.clear();
+        this.removeAll();
+        this.revalidate();
+        this.repaint();
+
+        for (int i = 0; i < numOfLanes; i++)
+        {
+            Horse horse = new Horse();
+            this.horses.add(horse);
+            this.add(horse);
+        }
     }
 }

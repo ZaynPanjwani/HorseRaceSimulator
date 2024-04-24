@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RaceUI extends JFrame {
+
+    private HorseLanes horseLanes;
     public RaceUI() {
         super("Main");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -13,6 +15,7 @@ public class RaceUI extends JFrame {
 
     public void initialiseComponents() {
         HorseLanes horseLanes = new HorseLanes(3);
+        this.horseLanes = horseLanes;
 
         JPanel horseInfo = new JPanel();
         horseInfo.setPreferredSize(new Dimension((int) (this.getWidth()*0.2), (int) (this.getHeight()*0.7)));
@@ -39,5 +42,9 @@ public class RaceUI extends JFrame {
         this.add(horseInfo, BorderLayout.EAST);
         this.add(horseLanes, BorderLayout.WEST);
         this.add(customization, BorderLayout.SOUTH);
+    }
+
+    public HorseLanes getHorseLanes() {
+        return horseLanes;
     }
 }
