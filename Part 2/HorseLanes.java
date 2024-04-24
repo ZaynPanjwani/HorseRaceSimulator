@@ -40,4 +40,12 @@ public class HorseLanes extends JPanel {
         }
         Main.getRaceUI().getHorseStatus().updateLanes(this.horses);
     }
+
+    public void resetHorses() {
+        this.horses.forEach(Horse::resetHorse);
+    }
+
+    public ArrayList<Horse> getHorses() {
+        return this.horses;
+    }
 }

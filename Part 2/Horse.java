@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class Horse extends Canvas {
 
+    private boolean broadcast = false;
 
     public void paint(Graphics g) {
         //TODO: replace this placeholder sprite with a proper horse sprite
@@ -37,7 +38,21 @@ public class Horse extends Canvas {
     }
 
     public boolean hasFinished() {
-        return this.distanceTravelled+100 >= this.getWidth();
+
+        if(this.distanceTravelled+100 >= this.getWidth()) {
+            if(!broadcast) {
+                broadcast=true;
+                Main.getRaceUI().horseFinished();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public void resetHorse() {
+        this.distanceTravelled = 0;
+        this.fallen = false;
+        this.broadcast = false;
     }
 
     public void moveHorse() {

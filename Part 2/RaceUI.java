@@ -9,6 +9,11 @@ public class RaceUI extends JFrame {
     private HorseLanes horseLanes;
     private HorseStatus horseStatus;
     private Settings customization;
+
+    private int horsesInRace;
+
+    private ScheduledExecutorService executor;
+
     public RaceUI() {
         super("Main");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,9 +66,21 @@ public class RaceUI extends JFrame {
     }
 
     public void startRace() {
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        this.horseLanes.resetHorses();
+        executor = Executors.newSingleThreadScheduledExecutor();
+
+        horsesInRace = getHorseLanes().getHorses().size();
 
         executor.scheduleAtFixedRate(horseLanes::tickAllHorses, 100, 16, TimeUnit.MILLISECONDS);
+    }
+
+    public void stopRace() {
+        executor.shutdown();
+    }
+
+    public void horseFinished() {
+        horsesInRace-=1;
+        if(horsesInRace == 0) this.stopRace();
     }
 
     public HorseLanes getHorseLanes() {
