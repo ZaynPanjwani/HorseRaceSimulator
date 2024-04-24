@@ -2,13 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class RaceUI extends JFrame {
 
     private HorseLanes horseLanes;
-    private HorseStatus horseInfo;
+    private HorseStatus horseStatus;
     private Settings customization;
     public RaceUI() {
         super("Main");
@@ -21,7 +20,7 @@ public class RaceUI extends JFrame {
 
     public void initialiseComponents() {
 
-        horseInfo = new HorseStatus();
+        horseStatus = new HorseStatus();
 
 
         HorseLanes horseLanes = new HorseLanes(3);
@@ -39,7 +38,7 @@ public class RaceUI extends JFrame {
             }
         });
 
-        this.add(horseInfo, BorderLayout.EAST);
+        this.add(horseStatus, BorderLayout.EAST);
         this.add(horseLanes, BorderLayout.WEST);
         this.add(customization, BorderLayout.SOUTH);
 
@@ -51,12 +50,12 @@ public class RaceUI extends JFrame {
 
     public void handleResize() {
         horseLanes.setPreferredSize(new Dimension((int) (RaceUI.super.getWidth()*0.8), (int) (RaceUI.super.getHeight()*0.7)));
-        horseInfo.setPreferredSize(new Dimension((int) (RaceUI.super.getWidth()*0.2), (int) (RaceUI.super.getHeight()*0.7)));
+        horseStatus.setPreferredSize(new Dimension((int) (RaceUI.super.getWidth()*0.2), (int) (RaceUI.super.getHeight()*0.7)));
         customization.setPreferredSize(new Dimension((int) RaceUI.super.getWidth(), (int) (RaceUI.super.getHeight()*0.3)));
-        horseInfo.revalidate();
+        horseStatus.revalidate();
         horseLanes.revalidate();
         customization.revalidate();
-        horseInfo.repaint();
+        horseStatus.repaint();
         horseLanes.repaint();
         customization.repaint();
     }
@@ -71,8 +70,8 @@ public class RaceUI extends JFrame {
         return horseLanes;
     }
 
-    public HorseStatus getHorseInfo() {
-        return horseInfo;
+    public HorseStatus getHorseStatus() {
+        return horseStatus;
     }
 
     public Settings getCustomization() {

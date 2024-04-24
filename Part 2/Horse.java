@@ -22,13 +22,13 @@ public class Horse extends Canvas {
     }
 
     private int distanceTravelled = 0;
-    private String name;
+    private HorseInfo horseInfo;
     private boolean fallen;
-    private double confidence;
 
     public Horse() {
         super();
         this.distanceTravelled = 0;
+        this.horseInfo = new HorseInfo("Abcd", 0.5, "some breed");
         this.setBackground(Color.YELLOW);
         this.setForeground(Color.BLACK);
         setBackground(Color.white);
@@ -57,14 +57,12 @@ public class Horse extends Canvas {
         this.distanceTravelled = distanceTravelled;
     }
 
-    @Override
-    public String getName() {
-        return name;
+    public HorseInfo getHorseInfo() {
+        return horseInfo;
     }
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
+    public void setHorseInfo(HorseInfo horseInfo) {
+        this.horseInfo = horseInfo;
     }
 
     public boolean isFallen() {
@@ -75,11 +73,4 @@ public class Horse extends Canvas {
         this.fallen = fallen;
     }
 
-    public double getConfidence() {
-        return confidence;
-    }
-
-    public void setConfidence(double confidence) {
-        this.confidence = confidence;
-    }
 }
