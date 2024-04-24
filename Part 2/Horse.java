@@ -50,6 +50,9 @@ public class Horse extends Canvas {
     }
 
     public void resetHorse() {
+        Graphics g = this.getGraphics();
+        g.clearRect(0, 0, this.getWidth(), this.getHeight());
+
         this.distanceTravelled = 0;
         this.fallen = false;
         this.broadcast = false;
