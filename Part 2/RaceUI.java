@@ -8,10 +8,11 @@ public class RaceUI extends JFrame {
         this.setSize(400, 400);
         this.setLayout(new BorderLayout());
 
-        JPanel horseLanes = new JPanel();
-        horseLanes.setLayout(new BoxLayout(horseLanes, BoxLayout.Y_AXIS));
-        horseLanes.setBackground(Color.RED);
-        horseLanes.setPreferredSize(new Dimension((int) (this.getWidth()*0.8), (int) (this.getHeight()*0.7)));
+        this.setVisible(true);
+    }
+
+    public void initialiseComponents() {
+        HorseLanes horseLanes = new HorseLanes(3);
 
         JPanel horseInfo = new JPanel();
         horseInfo.setPreferredSize(new Dimension((int) (this.getWidth()*0.2), (int) (this.getHeight()*0.7)));
@@ -39,9 +40,5 @@ public class RaceUI extends JFrame {
         this.add(horseInfo, BorderLayout.EAST);
         this.add(horseLanes, BorderLayout.WEST);
         this.add(customization, BorderLayout.SOUTH);
-
-
-
-        this.setVisible(true);
     }
 }
