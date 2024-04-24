@@ -28,7 +28,7 @@ public class Horse extends Canvas {
     public Horse() {
         super();
         this.distanceTravelled = 0;
-        this.horseInfo = new HorseInfo("Abcd", 0.5, "some breed");
+        this.horseInfo = HorseInfo.generateRandom();
         this.setBackground(Color.YELLOW);
         this.setForeground(Color.BLACK);
         setBackground(Color.white);

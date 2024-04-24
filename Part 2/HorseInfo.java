@@ -1,3 +1,6 @@
+import java.util.Random;
+import java.util.random.*;
+
 public class HorseInfo {
     private String name;
     private double confidence;
@@ -10,6 +13,22 @@ public class HorseInfo {
         this.name = name;
         this.confidence = confidence;
         this.breed = breed;
+    }
+
+    public static HorseInfo generateRandom() {
+        Random random = new Random();
+        String[] firstNames = {"Thunder",  "Shadow", "Spirit", "Midnight", "Whisper", "Starlight", "Storm", "Blaze", "Dusty", "Sunny"};
+
+        String[] lastNames = {"Meadow", "River", "Glen", "Valley", "Hill", "Ridge", "Prairie", "Mist", "Breeze", "Forest"};
+
+        String name = String.format("%s %s", firstNames[random.nextInt(firstNames.length)], lastNames[random.nextInt(lastNames.length)]);
+        double confidence = (double) Math.round(random.nextDouble() * 100) /100;
+
+        String[] breeds = {"Mustang", "Haflinger", "Welsh Pony", "Tennessee Walking Horse", "Irish Draught", "Akhal-Teke", "Percheron", "Miniature Horse", "Gypsy Vanner", "Hanoverian"};
+
+        String breed = breeds[random.nextInt(breeds.length)];
+
+        return new HorseInfo(name, confidence, breed);
     }
 
     public String getName() {
