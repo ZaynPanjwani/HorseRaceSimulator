@@ -18,9 +18,8 @@ public class RaceUI extends JFrame {
         horseInfo.setPreferredSize(new Dimension((int) (this.getWidth()*0.2), (int) (this.getHeight()*0.7)));
         horseInfo.setBackground(Color.BLUE);
 
-        JPanel customization =  new JPanel();
-        customization.setBackground(Color.GREEN);
-        customization.setPreferredSize(new Dimension((int) this.getWidth(), (int) (this.getHeight()*0.3)));
+        Settings customization =  new Settings();
+
 
 
         this.addComponentListener(new java.awt.event.ComponentAdapter() {
