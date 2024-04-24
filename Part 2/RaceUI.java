@@ -1,5 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class RaceUI extends JFrame {
 
@@ -53,6 +57,12 @@ public class RaceUI extends JFrame {
         horseInfo.repaint();
         horseLanes.repaint();
         customization.repaint();
+    }
+
+    public void startRace() {
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+
+        executor.scheduleAtFixedRate(horseLanes::tickAllHorses, 100, 16, TimeUnit.MILLISECONDS);
     }
 
     public HorseLanes getHorseLanes() {

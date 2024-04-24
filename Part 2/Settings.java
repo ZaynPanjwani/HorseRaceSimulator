@@ -20,6 +20,10 @@ public class Settings extends JPanel {
 
         JButton startButton = new JButton("Start");
 
+        startButton.addActionListener(e -> {
+            Main.getRaceUI().startRace();
+        });
+
 
         this.add(startButton); // (1,4)
 

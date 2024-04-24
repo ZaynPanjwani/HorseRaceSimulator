@@ -22,6 +22,10 @@ public class HorseLanes extends JPanel {
 
     }
 
+    public void tickAllHorses() {
+        this.horses.forEach(Horse::moveHorse);
+    }
+
     public void updateLanes(int numOfLanes) {
         this.horses.clear();
         this.removeAll();
