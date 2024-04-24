@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class RaceUI extends JFrame {
 
     private HorseLanes horseLanes;
-    private JPanel horseInfo;
+    private HorseStatus horseInfo;
     private Settings customization;
     public RaceUI() {
         super("Main");
@@ -20,12 +20,14 @@ public class RaceUI extends JFrame {
     }
 
     public void initialiseComponents() {
+
+        horseInfo = new HorseStatus();
+
+
         HorseLanes horseLanes = new HorseLanes(3);
         this.horseLanes = horseLanes;
 
-        horseInfo = new JPanel();
-        horseInfo.setPreferredSize(new Dimension((int) (this.getWidth()*0.2), (int) (this.getHeight()*0.7)));
-        horseInfo.setBackground(Color.BLUE);
+
 
         customization =  new Settings();
 
@@ -67,5 +69,13 @@ public class RaceUI extends JFrame {
 
     public HorseLanes getHorseLanes() {
         return horseLanes;
+    }
+
+    public HorseStatus getHorseInfo() {
+        return horseInfo;
+    }
+
+    public Settings getCustomization() {
+        return customization;
     }
 }

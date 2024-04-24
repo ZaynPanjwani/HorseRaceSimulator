@@ -48,4 +48,38 @@ public class Horse extends Canvas {
         this.distanceTravelled +=3;
         this.paint(this.getGraphics());
     }
+
+    public int getDistanceTravelled() {
+        return distanceTravelled;
+    }
+
+    public void setDistanceTravelled(int distanceTravelled) {
+        this.distanceTravelled = distanceTravelled;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isFallen() {
+        return fallen;
+    }
+
+    public void setFallen(boolean fallen) {
+        this.fallen = fallen;
+    }
+
+    public double getConfidence() {
+        return confidence;
+    }
+
+    public void setConfidence(double confidence) {
+        this.confidence = confidence;
+    }
 }

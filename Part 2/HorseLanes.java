@@ -38,5 +38,6 @@ public class HorseLanes extends JPanel {
             this.horses.add(horse);
             this.add(horse);
         }
+        Main.getRaceUI().getHorseInfo().updateLanes(this.horses);
     }
 }
