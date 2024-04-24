@@ -227,7 +227,7 @@ public class Race
         multiplePrint(' ',spacesAfter);
         
         //print the | for the end of the track
-        System.out.print('|');
+        System.out.printf("| (Horse Name: %s, Confidence: %s)", theHorse.getName(), theHorse.getConfidence());
     }
         
     
