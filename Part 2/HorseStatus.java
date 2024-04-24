@@ -19,7 +19,7 @@ public class HorseStatus extends JPanel {
             horseStatus.setLayout(new GridLayout(3, 2));
             horseStatus.add(new JLabel("Name: " + horse.getHorseInfo().getName()));
             horseStatus.add(new JLabel("Confidence: " + horse.getHorseInfo().getConfidence()));
-            horseStatus.add(new JLabel("Odds: 0.1"));
+            horseStatus.add(new JLabel("Odds: " + horse.getHorseInfo().calculateOdds(this.horses)));
             AtomicInteger amountBet = new AtomicInteger();
             JLabel amountBetLabel = new JLabel("Bet: $0");
             horseStatus.add(amountBetLabel);

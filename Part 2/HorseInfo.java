@@ -11,6 +11,21 @@ public class HorseInfo {
     private int numOfLoss;
     private int totalDistanceTravelled;
 
+    private int ticksSurvived;
+
+    public double getAverageSpeed() {
+        return ((double) this.getTotalDistanceTravelled())/((double) this.getTicksSurvived());
+    }
+
+    public int getTicksSurvived() {
+        return Math.max(1, this.ticksSurvived);
+    }
+
+    public void setTicksSurvived(int ticksSurvived) {
+        this.ticksSurvived = ticksSurvived;
+    }
+
+
     public HorseInfo(String name, double confidence, String breed) {
         this.name = name;
         this.confidence = confidence;
@@ -70,7 +85,7 @@ public class HorseInfo {
     }
 
     public int getTotalDistanceTravelled() {
-        return totalDistanceTravelled;
+        return Math.max(totalDistanceTravelled, 1);
     }
 
     public void setTotalDistanceTravelled(int totalDistanceTravelled) {
@@ -78,10 +93,14 @@ public class HorseInfo {
     }
 
     public double calculateOdds(ArrayList<Horse> otherHorses) {
+        double probabilityOfFalling = this.getConfidence();
+        double ownScore = this.getAverageSpeed()/probabilityOfFalling;
+        double sum = ownScore;
         for(Horse horse : otherHorses) {
             if(horse.getHorseInfo().getName().equals(this.getName())) continue;
-
+            sum+=(horse.getHorseInfo().getAverageSpeed()/probabilityOfFalling);
         }
-        return 0;
+        System.out.printf("Probability: %s%nScore: %s%nSum: %s%nAverage speed: %s%n", probabilityOfFalling, ownScore, sum, this.getAverageSpeed());
+        return ownScore/sum;
     }
 }

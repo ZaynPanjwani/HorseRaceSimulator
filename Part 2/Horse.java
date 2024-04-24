@@ -33,9 +33,6 @@ public class Horse extends Canvas {
         this.setForeground(Color.BLACK);
         setBackground(Color.white);
 
-
-
-
         this.setVisible(true);
     }
 
@@ -45,6 +42,8 @@ public class Horse extends Canvas {
 
     public void moveHorse() {
         if(this.hasFinished()) return;
+        this.horseInfo.setTicksSurvived(this.horseInfo.getTicksSurvived()+1);
+        this.horseInfo.setTotalDistanceTravelled(this.horseInfo.getTotalDistanceTravelled() + (int) (5+(5*getHorseInfo().getConfidence())));
         this.distanceTravelled += (int) (5+(5*getHorseInfo().getConfidence()));
         this.paint(this.getGraphics());
     }
