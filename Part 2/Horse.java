@@ -45,7 +45,7 @@ public class Horse extends Canvas {
 
     public void moveHorse() {
         if(this.hasFinished()) return;
-        this.distanceTravelled +=3;
+        this.distanceTravelled += (int) (5+(5*getHorseInfo().getConfidence()));
         this.paint(this.getGraphics());
     }
 

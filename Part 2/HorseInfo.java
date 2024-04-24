@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 import java.util.random.*;
 
@@ -73,5 +75,13 @@ public class HorseInfo {
 
     public void setTotalDistanceTravelled(int totalDistanceTravelled) {
         this.totalDistanceTravelled = totalDistanceTravelled;
+    }
+
+    public double calculateOdds(ArrayList<Horse> otherHorses) {
+        for(Horse horse : otherHorses) {
+            if(horse.getHorseInfo().getName().equals(this.getName())) continue;
+
+        }
+        return 0;
     }
 }
