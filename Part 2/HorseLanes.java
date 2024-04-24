@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class HorseLanes extends JPanel {
-    private ArrayList<JPanel> horses;
+    private ArrayList<Horse> horses;
 
 
     public HorseLanes(int numOfLanes)
