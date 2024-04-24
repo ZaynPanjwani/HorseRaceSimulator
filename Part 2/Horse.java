@@ -39,7 +39,12 @@ public class Horse extends Canvas {
         this.setVisible(true);
     }
 
+    public boolean hasFinished() {
+        return this.distanceTravelled+100 >= this.getWidth();
+    }
+
     public void moveHorse() {
+        if(this.hasFinished()) return;
         this.distanceTravelled +=3;
         this.paint(this.getGraphics());
     }
