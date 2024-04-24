@@ -6,6 +6,7 @@ public class Horse extends Canvas {
 
     public void paint(Graphics g) {
         //TODO: replace this placeholder sprite with a proper horse sprite
+        g.clearRect(distanceTravelled-20, 10, distanceTravelled, 100);
         g.setColor(Color.black);
         g.fillRect(distanceTravelled, 10, 100, 100);
         g.setColor(Color.white);
