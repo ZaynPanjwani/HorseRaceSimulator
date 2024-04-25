@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class Settings extends JPanel {
     public Settings() {
@@ -151,5 +152,12 @@ public class Settings extends JPanel {
         }
         this.add(horseManeColorGrid);
 
+    }
+
+    public void disableAllComponents() {
+        Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(false));
+    }
+    public void enableAllComponents() {
+        Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(true));
     }
 }

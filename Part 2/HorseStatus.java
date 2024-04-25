@@ -11,6 +11,11 @@ public class HorseStatus extends JPanel {
         this.setBackground(Color.BLUE);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
+
+    public void updateLanes() {
+        this.updateLanes(null);
+    }
+
     public void updateLanes(ArrayList<Horse> horses) {
         if(this.horses == null) this.horses = horses;
         this.removeAll();
@@ -45,5 +50,14 @@ public class HorseStatus extends JPanel {
 
             this.add(horseStatus);
         }
+    }
+
+    public void updateHorse(Horse horse) {
+        int idx = this.horses.indexOf(horse);
+
+        JPanel horseStats = (JPanel) this.getComponent(idx);
+
+        ( (JLabel) horseStats.getComponent(1)).setText(String.format("Confidence: %.2f", horse.getHorseInfo().getConfidence())); //confidence
+        this.repaint();
     }
 }

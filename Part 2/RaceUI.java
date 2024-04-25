@@ -67,6 +67,7 @@ public class RaceUI extends JFrame {
 
     public void startRace() {
         this.horseLanes.resetHorses();
+        this.customization.disableAllComponents();
         executor = Executors.newSingleThreadScheduledExecutor();
 
         horsesInRace = getHorseLanes().getHorses().size();
@@ -76,10 +77,12 @@ public class RaceUI extends JFrame {
 
     public void stopRace() {
         executor.shutdown();
+        this.customization.enableAllComponents();
     }
 
     public void horseFinished() {
         horsesInRace-=1;
+        //getHorseStatus().updateLanes();
         if(horsesInRace == 0) this.stopRace();
     }
 

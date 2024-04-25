@@ -101,6 +101,6 @@ public class HorseInfo {
             sum+=(horse.getHorseInfo().getAverageSpeed()/probabilityOfFalling);
         }
         System.out.printf("Probability: %s%nScore: %s%nSum: %s%nAverage speed: %s%n", probabilityOfFalling, ownScore, sum, this.getAverageSpeed());
-        return ownScore/sum;
+        return ((double) Math.round((ownScore / sum) * 100) )/100;
     }
 }

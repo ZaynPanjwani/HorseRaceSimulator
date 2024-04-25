@@ -8,18 +8,23 @@ public class Horse extends Canvas {
     public void paint(Graphics g) {
         //TODO: replace this placeholder sprite with a proper horse sprite
         g.clearRect(distanceTravelled-20, 10, distanceTravelled, 100);
-        g.setColor(Color.black);
-        g.fillRect(distanceTravelled, 10, 100, 100);
-        g.setColor(Color.white);
-        g.fillRect(distanceTravelled+10, 20, 80, 80);
-        g.setColor(Color.black);
-        g.fillRect(distanceTravelled+20, 30, 60, 60);
-        g.setColor(Color.white);
-        g.fillRect(distanceTravelled+30, 40, 40, 40);
-        g.setColor(Color.black);
-        g.fillRect(distanceTravelled+40, 50, 20, 20);
-        g.setColor(Color.white);
-        g.fillRect(distanceTravelled+50, 60, 0, 0);
+        if(!this.fallen) {
+            g.setColor(Color.black);
+            g.fillRect(distanceTravelled, 10, 100, 100);
+            g.setColor(Color.white);
+            g.fillRect(distanceTravelled+10, 20, 80, 80);
+            g.setColor(Color.black);
+            g.fillRect(distanceTravelled+20, 30, 60, 60);
+            g.setColor(Color.white);
+            g.fillRect(distanceTravelled+30, 40, 40, 40);
+            g.setColor(Color.black);
+            g.fillRect(distanceTravelled+40, 50, 20, 20);
+            g.setColor(Color.white);
+            g.fillRect(distanceTravelled+50, 60, 0, 0);
+        }else {
+            g.setColor(Color.RED);
+            g.fillRect(distanceTravelled, 10, 100, 100);
+        }
     }
 
     private int distanceTravelled = 0;
@@ -58,8 +63,28 @@ public class Horse extends Canvas {
         this.broadcast = false;
     }
 
+    public void fall() {
+        this.fallen = true;
+        this.getHorseInfo().setNumOfLoss(this.getHorseInfo().getNumOfLoss()+1);
+        this.getHorseInfo().setTotalDistanceTravelled(this.getHorseInfo().getTotalDistanceTravelled()+distanceTravelled);
+        this.getHorseInfo().setConfidence(this.getHorseInfo().getConfidence()-0.1);
+        Main.getRaceUI().getHorseStatus().updateHorse(this);
+        Main.getRaceUI().horseFinished();
+        broadcast = true;
+
+    }
+
+    public void tryFall() {
+        if(Math.random() < (this.getHorseInfo().getConfidence()/75)) {
+            fall();
+            this.paint(this.getGraphics());
+        }
+    }
+
     public void moveHorse() {
-        if(this.hasFinished()) return;
+        if(this.hasFinished() || this.fallen) return;
+        this.tryFall();
+        if(this.fallen) return;
         this.horseInfo.setTicksSurvived(this.horseInfo.getTicksSurvived()+1);
         this.horseInfo.setTotalDistanceTravelled(this.horseInfo.getTotalDistanceTravelled() + (int) (5+(5*getHorseInfo().getConfidence())));
         this.distanceTravelled += (int) (5+(5*getHorseInfo().getConfidence()));
