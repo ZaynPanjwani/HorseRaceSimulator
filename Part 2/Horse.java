@@ -72,7 +72,9 @@ public class Horse extends Canvas {
         g.clearRect(distanceTravelled-20, 10, distanceTravelled, 100);
         if(!this.fallen) {
             g.drawImage(sprite, distanceTravelled, 10, null);
-            g.drawImage(fence, 30, this.getHeight()-100, null);
+            for(int i = 0; i<this.getWidth(); i+=(fence.getWidth(null)-15)) {
+                g.drawImage(fence, i, this.getHeight()-100, null);
+            }
         }else {
             g.setColor(Color.RED);
             g.fillRect(distanceTravelled, 10, 100, 100);
