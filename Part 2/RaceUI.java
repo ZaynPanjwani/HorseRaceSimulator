@@ -80,6 +80,7 @@ public class RaceUI extends JFrame {
 
     public void stopRace() {
         executor.shutdown();
+        horseStatus.updateOdds();
         this.customization.enableAllComponents();
     }
 

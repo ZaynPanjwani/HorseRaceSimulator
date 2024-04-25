@@ -12,6 +12,7 @@ public class Horse extends Canvas {
     private int distanceTravelled = 0;
     private HorseInfo horseInfo;
     private boolean fallen;
+    private double odds;
     private Image sprite;
 
     public Horse() {
@@ -28,6 +29,14 @@ public class Horse extends Canvas {
         setBackground(Color.white);
 
         this.setVisible(true);
+    }
+
+    public double getOdds() {
+        return odds;
+    }
+
+    public void setOdds(double odds) {
+        this.odds = odds;
     }
 
     public boolean hasFinished() {
@@ -69,7 +78,6 @@ public class Horse extends Canvas {
     public void fall() {
         this.fallen = true;
         this.getHorseInfo().setNumOfLoss(this.getHorseInfo().getNumOfLoss()+1);
-        this.getHorseInfo().setTotalDistanceTravelled(this.getHorseInfo().getTotalDistanceTravelled()+distanceTravelled);
         this.getHorseInfo().setConfidence(this.getHorseInfo().getConfidence()-0.1);
         Main.getRaceUI().getHorseStatus().updateHorse(this);
         Main.getRaceUI().horseFinished();

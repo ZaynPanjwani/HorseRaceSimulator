@@ -19,12 +19,13 @@ public class HorseStatus extends JPanel {
     public void updateLanes(ArrayList<Horse> horses) {
         if(this.horses == null) this.horses = horses;
         this.removeAll();
+        OddsCalculator.calculateOdds(this.horses);
         for(Horse horse : this.horses) {
             JPanel horseStatus = new JPanel();
             horseStatus.setLayout(new GridLayout(3, 2));
             horseStatus.add(new JLabel("Name: " + horse.getHorseInfo().getName()));
             horseStatus.add(new JLabel("Confidence: " + horse.getHorseInfo().getConfidence()));
-            horseStatus.add(new JLabel("Odds: " + horse.getHorseInfo().calculateOdds(this.horses)));
+            horseStatus.add(new JLabel(String.format("Odds: %.2f", horse.getOdds())));
             AtomicInteger amountBet = new AtomicInteger();
             JLabel amountBetLabel = new JLabel("Bet: $0");
             horseStatus.add(amountBetLabel);
@@ -49,7 +50,10 @@ public class HorseStatus extends JPanel {
             horseStatus.add(betOnHorse);
 
             this.add(horseStatus);
+
+
         }
+        this.repaint();
     }
 
     public void updateHorse(Horse horse) {
@@ -59,5 +63,14 @@ public class HorseStatus extends JPanel {
 
         ( (JLabel) horseStats.getComponent(1)).setText(String.format("Confidence: %.2f", horse.getHorseInfo().getConfidence())); //confidence
         this.repaint();
+    }
+
+    public void updateOdds() {
+        OddsCalculator.calculateOdds(horses);
+        for(int i = 0; i < horses.size(); i++) {
+            JPanel stats = (JPanel) this.getComponent(i);
+            JLabel odds = (JLabel) stats.getComponent(2);
+            odds.setText(String.format("Odds: %.2f", horses.get(i).getOdds()));
+        }
     }
 }

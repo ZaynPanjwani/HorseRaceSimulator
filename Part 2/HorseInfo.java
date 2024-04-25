@@ -92,15 +92,4 @@ public class HorseInfo {
         this.totalDistanceTravelled = totalDistanceTravelled;
     }
 
-    public double calculateOdds(ArrayList<Horse> otherHorses) {
-        double probabilityOfFalling = this.getConfidence();
-        double ownScore = this.getAverageSpeed()/probabilityOfFalling;
-        double sum = ownScore;
-        for(Horse horse : otherHorses) {
-            if(horse.getHorseInfo().getName().equals(this.getName())) continue;
-            sum+=(horse.getHorseInfo().getAverageSpeed()/probabilityOfFalling);
-        }
-        System.out.printf("Probability: %s%nScore: %s%nSum: %s%nAverage speed: %s%n", probabilityOfFalling, ownScore, sum, this.getAverageSpeed());
-        return ((double) Math.round((ownScore / sum) * 100) )/100;
-    }
 }
