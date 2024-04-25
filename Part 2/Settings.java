@@ -17,6 +17,8 @@ public class Settings extends JPanel {
 
         JComboBox<Integer> numberOfLanes = new JComboBox<>(new Integer[]{2,3,4,5});
 
+        numberOfLanes.setSelectedIndex(1);
+
         numberOfLanes.addActionListener(e -> Main.getRaceUI().getHorseLanes().updateLanes(numberOfLanes.getSelectedIndex()+2));
 
         JButton startButton = new JButton("Start");
