@@ -47,6 +47,11 @@ public class Horse extends Canvas {
         if(this.distanceTravelled+100 >= this.getWidth()) {
             if(!broadcast) {
                 broadcast=true;
+                if(!Main.getRaceUI().isAwardedWinner()) {
+                    this.getHorseInfo().setConfidence(this.getHorseInfo().getConfidence()+0.1);
+                    Main.getRaceUI().setAwardedWinner(true);
+                }
+                Main.getRaceUI().getHorseStatus().updateHorse(this);
                 Main.getRaceUI().horseFinished();
             }
             return true;

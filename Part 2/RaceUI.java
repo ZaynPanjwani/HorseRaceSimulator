@@ -12,6 +12,8 @@ public class RaceUI extends JFrame {
 
     private int horsesInRace;
 
+    private boolean awardedWinner = false;
+
     private ScheduledExecutorService executor;
 
     public RaceUI() {
@@ -66,6 +68,7 @@ public class RaceUI extends JFrame {
     }
 
     public void startRace() {
+        this.awardedWinner = false;
         this.horseLanes.resetHorses();
         this.customization.disableAllComponents();
         executor = Executors.newSingleThreadScheduledExecutor();
@@ -82,8 +85,15 @@ public class RaceUI extends JFrame {
 
     public void horseFinished() {
         horsesInRace-=1;
-        //getHorseStatus().updateLanes();
         if(horsesInRace == 0) this.stopRace();
+    }
+
+    public boolean isAwardedWinner() {
+        return awardedWinner;
+    }
+
+    public void setAwardedWinner(boolean awardedWinner) {
+        this.awardedWinner = awardedWinner;
     }
 
     public HorseLanes getHorseLanes() {
