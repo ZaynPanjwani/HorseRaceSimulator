@@ -66,15 +66,18 @@ public class Horse extends Canvas {
     }
 
     public void paint(Graphics g) {
-        g.clearRect(distanceTravelled-20, 10, distanceTravelled, 100);
+        g.clearRect(distanceTravelled-20, 10, distanceTravelled, 80);
+
+        for(int i = 0; i<this.getWidth(); i+=(fence.getWidth(null)-15)) {
+            g.drawImage(fence, i, 50, null);
+        }
+
         if(!this.fallen) {
             g.drawImage(sprite, distanceTravelled, 10, null);
-            for(int i = 0; i<this.getWidth(); i+=(fence.getWidth(null)-15)) {
-                g.drawImage(fence, i, 50, null);
-            }
+
         }else {
             g.setColor(Color.RED);
-            g.fillRect(distanceTravelled, 10, 100, 100);
+            g.fillRect(distanceTravelled, 10, 100, 80);
         }
     }
 
@@ -82,6 +85,7 @@ public class Horse extends Canvas {
         this.fallen = true;
         this.getHorseInfo().setNumOfLoss(this.getHorseInfo().getNumOfLoss()+1);
         this.getHorseInfo().setConfidence(this.getHorseInfo().getConfidence()-0.1);
+        Main.getRaceUI().getLeaderboard().addFallenEntry(this);
         Main.getRaceUI().getHorseStatus().updateHorse(this);
         Main.getRaceUI().horseFinished();
         broadcast = true;

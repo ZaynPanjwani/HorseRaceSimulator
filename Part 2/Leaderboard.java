@@ -39,10 +39,12 @@ public class Leaderboard extends JPanel {
     }
 
     public int addEntry(Horse horse) {
-        this.add(new JLabel(String.format("%s. %s", position+1, horse.getHorseInfo().getName())));
+        this.add(new JLabel(String.format("%s. %s", position+1, horse.getHorseInfo().getName())), position+1);
+        this.repaint();
         return ++position;
     }
     public void addFallenEntry(Horse horse) {
         this.add(new JLabel(String.format("DNF. %s", horse.getHorseInfo().getName())));
+        this.repaint();
     }
 }
