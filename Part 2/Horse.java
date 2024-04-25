@@ -1,38 +1,26 @@
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Horse extends Canvas {
 
+
     private boolean broadcast = false;
-
-    public void paint(Graphics g) {
-        //TODO: replace this placeholder sprite with a proper horse sprite
-        g.clearRect(distanceTravelled-20, 10, distanceTravelled, 100);
-        if(!this.fallen) {
-            g.setColor(Color.black);
-            g.fillRect(distanceTravelled, 10, 100, 100);
-            g.setColor(Color.white);
-            g.fillRect(distanceTravelled+10, 20, 80, 80);
-            g.setColor(Color.black);
-            g.fillRect(distanceTravelled+20, 30, 60, 60);
-            g.setColor(Color.white);
-            g.fillRect(distanceTravelled+30, 40, 40, 40);
-            g.setColor(Color.black);
-            g.fillRect(distanceTravelled+40, 50, 20, 20);
-            g.setColor(Color.white);
-            g.fillRect(distanceTravelled+50, 60, 0, 0);
-        }else {
-            g.setColor(Color.RED);
-            g.fillRect(distanceTravelled, 10, 100, 100);
-        }
-    }
-
     private int distanceTravelled = 0;
     private HorseInfo horseInfo;
     private boolean fallen;
+    private Image sprite;
 
     public Horse() {
         super();
+        try {
+            this.sprite = ImageIO.read(new File("/Users/zaynpanjwani/Desktop/HorseRace Starter/Part 2/pixil-frame-0.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.distanceTravelled = 0;
         this.horseInfo = HorseInfo.generateRandom();
         this.setBackground(Color.YELLOW);
@@ -66,6 +54,16 @@ public class Horse extends Canvas {
         this.distanceTravelled = 0;
         this.fallen = false;
         this.broadcast = false;
+    }
+
+    public void paint(Graphics g) {
+        g.clearRect(distanceTravelled-20, 10, distanceTravelled, 100);
+        if(!this.fallen) {
+            g.drawImage(sprite, distanceTravelled, 10, null);
+        }else {
+            g.setColor(Color.RED);
+            g.fillRect(distanceTravelled, 10, 100, 100);
+        }
     }
 
     public void fall() {
