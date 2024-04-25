@@ -10,6 +10,10 @@ public class RaceUI extends JFrame {
     private HorseStatus horseStatus;
     private Settings customization;
 
+    private Leaderboard leaderboard;
+
+    private JPanel bottom;
+
     private int horsesInRace;
 
     private boolean awardedWinner = false;
@@ -35,8 +39,11 @@ public class RaceUI extends JFrame {
         this.horseLanes = horseLanes;
 
 
-
+        bottom = new JPanel();
+        bottom.setSize(new Dimension(this.getWidth(), (int) (this.getHeight()*0.3)));
+        bottom.setLayout(new BorderLayout());
         customization =  new Settings();
+
 
 
 
@@ -48,7 +55,11 @@ public class RaceUI extends JFrame {
 
         this.add(horseStatus, BorderLayout.EAST);
         this.add(horseLanes, BorderLayout.WEST);
-        this.add(customization, BorderLayout.SOUTH);
+        bottom.add(customization, BorderLayout.WEST);
+        leaderboard = new Leaderboard();
+
+        bottom.add(leaderboard, BorderLayout.EAST);
+        this.add(bottom, BorderLayout.SOUTH);
 
 
         handleResize();
@@ -59,18 +70,25 @@ public class RaceUI extends JFrame {
     public void handleResize() {
         horseLanes.setPreferredSize(new Dimension((int) (RaceUI.super.getWidth()*0.8), (int) (RaceUI.super.getHeight()*0.7)));
         horseStatus.setPreferredSize(new Dimension((int) (RaceUI.super.getWidth()*0.2), (int) (RaceUI.super.getHeight()*0.7)));
-        customization.setPreferredSize(new Dimension((int) RaceUI.super.getWidth(), (int) (RaceUI.super.getHeight()*0.3)));
+        bottom.setPreferredSize(new Dimension(RaceUI.super.getWidth(), (int) (RaceUI.super.getHeight()*0.3)));
+        customization.setPreferredSize(new Dimension((int) (RaceUI.super.getWidth() *0.8), RaceUI.super.getHeight()));
+        leaderboard.setPreferredSize(new Dimension((int) (RaceUI.super.getWidth() *0.2), RaceUI.super.getHeight()));
+        customization.revalidate();
+        leaderboard.revalidate();
         horseStatus.revalidate();
         horseLanes.revalidate();
-        customization.revalidate();
+        bottom.revalidate();
+        customization.repaint();
+        leaderboard.repaint();
         horseStatus.repaint();
         horseLanes.repaint();
-        customization.repaint();
+        bottom.repaint();
     }
 
     public void startRace() {
         this.awardedWinner = false;
         this.horseLanes.resetHorses();
+        this.getLeaderboard().reset();
         this.customization.disableAllComponents();
         executor = Executors.newSingleThreadScheduledExecutor();
 
@@ -88,6 +106,10 @@ public class RaceUI extends JFrame {
     public void horseFinished() {
         horsesInRace-=1;
         if(horsesInRace == 0) this.stopRace();
+    }
+
+    public Leaderboard getLeaderboard() {
+        return this.leaderboard;
     }
 
     public boolean isAwardedWinner() {

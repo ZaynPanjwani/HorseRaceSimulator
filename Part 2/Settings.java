@@ -3,19 +3,22 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class Settings extends JPanel {
+
+    private JComboBox<Integer> numberOfLanes;
+
     public Settings() {
         super();
         GridLayout mainGridLayout = new GridLayout(4, 3);
         mainGridLayout.setHgap(10);
         this.setLayout(mainGridLayout);
         this.setBackground(new Color(238,238,238));
-        this.setPreferredSize(new Dimension((int) (Main.getRaceUI().getWidth()*0.8), (int) (Main.getRaceUI().getHeight()*0.3)));
+        this.setPreferredSize(new Dimension((int) (Main.getRaceUI().getWidth()*0.8), Main.getRaceUI().getHeight()));
         this.setForeground(Color.BLACK);
 
         this.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
-        JComboBox<Integer> numberOfLanes = new JComboBox<>(new Integer[]{2,3,4,5});
+        numberOfLanes = new JComboBox<>(new Integer[]{2,3,4,5});
 
         numberOfLanes.setSelectedIndex(1);
 
@@ -152,9 +155,11 @@ public class Settings extends JPanel {
     }
 
     public void disableAllComponents() {
+        numberOfLanes.setEnabled(false);
         Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(false));
     }
     public void enableAllComponents() {
+        numberOfLanes.setEnabled(true);
         Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(true));
     }
 }

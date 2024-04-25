@@ -1,6 +1,4 @@
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -47,9 +45,8 @@ public class Horse extends Canvas {
         if(this.distanceTravelled+100 >= this.getWidth()) {
             if(!broadcast) {
                 broadcast=true;
-                if(!Main.getRaceUI().isAwardedWinner()) {
+                if(Main.getRaceUI().getLeaderboard().addEntry(this) == 1) {
                     this.getHorseInfo().setConfidence(this.getHorseInfo().getConfidence()+0.1);
-                    Main.getRaceUI().setAwardedWinner(true);
                 }
                 Main.getRaceUI().getHorseStatus().updateHorse(this);
                 Main.getRaceUI().horseFinished();
@@ -73,7 +70,7 @@ public class Horse extends Canvas {
         if(!this.fallen) {
             g.drawImage(sprite, distanceTravelled, 10, null);
             for(int i = 0; i<this.getWidth(); i+=(fence.getWidth(null)-15)) {
-                g.drawImage(fence, i, this.getHeight()-100, null);
+                g.drawImage(fence, i, 50, null);
             }
         }else {
             g.setColor(Color.RED);
