@@ -5,11 +5,11 @@ import java.util.Arrays;
 public class Settings extends JPanel {
     public Settings() {
         super();
-        GridLayout mainGridLayout = new GridLayout(4, 5);
+        GridLayout mainGridLayout = new GridLayout(4, 3);
         mainGridLayout.setHgap(10);
         this.setLayout(mainGridLayout);
         this.setBackground(new Color(238,238,238));
-        this.setPreferredSize(new Dimension(Main.getRaceUI().getWidth(), (int) (Main.getRaceUI().getHeight()*0.3)));
+        this.setPreferredSize(new Dimension((int) (Main.getRaceUI().getWidth()*0.8), (int) (Main.getRaceUI().getHeight()*0.3)));
         this.setForeground(Color.BLACK);
 
         this.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -31,7 +31,8 @@ public class Settings extends JPanel {
         this.add(startButton); // (1,4)
 
 
-        this.add(new JLabel("Track conditions")); // (2,4)
+
+
         this.add(new JLabel("Track color")); // (3,4)
 
 
@@ -50,8 +51,6 @@ public class Settings extends JPanel {
         this.add(lanesSelectionPanel); // (5,4)
 
 
-        this.add(new JLabel("")); // (1,3)
-        this.add(new JLabel("")); // (2,3)
 
 
         JPanel trackColorsGrid = new JPanel();
@@ -98,14 +97,10 @@ public class Settings extends JPanel {
         this.add(breedColorGrid); // (4,3)
 
 
-        this.add(new JLabel("")); // (3.1)
-        this.add(new JLabel("")); // (4,1)
-        this.add(new JLabel("")); // (5,1)
         this.add(new JLabel("Uniform Color")); // (3,2)
-        this.add(new JLabel("Horse Equipment Color"));//
-        this.add(new JLabel("")); // (1,1)
-        this.add(new JLabel("")); // (2,1)
-        this.add(new JLabel("")); // (2,1)
+        this.add(new JLabel("Horse Equipment Color"));
+
+        this.add(new JLabel(""));
 
         JPanel uniformColorGrid = new JPanel();
         uniformColorGrid.setLayout((new GridLayout(2,3)));

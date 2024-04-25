@@ -19,7 +19,8 @@ public class RaceUI extends JFrame {
     public RaceUI() {
         super("Main");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(400, 400);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setResizable(false);
         this.setLayout(new BorderLayout());
 
         this.setVisible(true);

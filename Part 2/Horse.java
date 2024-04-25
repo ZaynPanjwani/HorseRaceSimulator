@@ -15,10 +15,13 @@ public class Horse extends Canvas {
     private double odds;
     private Image sprite;
 
+    private Image fence;
+
     public Horse() {
         super();
         try {
             this.sprite = ImageIO.read(new File("/Users/zaynpanjwani/Desktop/HorseRace Starter/Part 2/pixil-frame-0.png"));
+            this.fence = ImageIO.read(new File("/Users/zaynpanjwani/Desktop/HorseRace Starter/Part 2/pixil-frame-0 19.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,6 +72,7 @@ public class Horse extends Canvas {
         g.clearRect(distanceTravelled-20, 10, distanceTravelled, 100);
         if(!this.fallen) {
             g.drawImage(sprite, distanceTravelled, 10, null);
+            g.drawImage(fence, 30, this.getHeight()-100, null);
         }else {
             g.setColor(Color.RED);
             g.fillRect(distanceTravelled, 10, 100, 100);
