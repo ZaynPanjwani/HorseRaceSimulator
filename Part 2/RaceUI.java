@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -7,6 +8,8 @@ import java.util.concurrent.TimeUnit;
 public class RaceUI extends JFrame {
 
     private HorseLanes horseLanes;
+
+    private SaveFile gameState;
     private HorseStatus horseStatus;
     private Settings customization;
 
@@ -24,6 +27,8 @@ public class RaceUI extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(false);
         this.setLayout(new BorderLayout());
+
+        this.gameState = new SaveFile();
 
         this.setVisible(true);
     }
@@ -124,5 +129,18 @@ public class RaceUI extends JFrame {
 
     public Settings getCustomization() {
         return customization;
+    }
+
+
+    public SaveFile getGameState() {
+        return gameState;
+    }
+
+    public void saveGame(File saveFile) {
+        this.gameState.save(saveFile);
+    }
+
+    public void loadGame(File saveFile) {
+        this.gameState.load(saveFile);
     }
 }

@@ -124,7 +124,7 @@ public class Settings extends JPanel {
 
         this.add(breedColorGrid); // (4,3)
 
-        //replacing with the save/load btns
+
         JPanel saveLoadButtons = new JPanel();
         saveLoadButtons.setLayout(new GridLayout(2,1));
 
@@ -136,7 +136,7 @@ public class Settings extends JPanel {
 
             File chosenFile = fileChooser.getSelectedFile();
             if(chosenFile != null) {
-                //save here
+                Main.getRaceUI().saveGame(chosenFile);
             }
         });
 
@@ -148,7 +148,7 @@ public class Settings extends JPanel {
 
             File chosenFile = fileChooser.getSelectedFile();
             if(chosenFile != null && chosenFile.exists() && chosenFile.canRead()) {
-                //load here
+                Main.getRaceUI().loadGame(chosenFile);
             }
         });
 
