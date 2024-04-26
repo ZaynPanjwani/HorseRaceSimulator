@@ -56,14 +56,12 @@ public class HorseLanes extends JPanel {
     }
 
     public void updateAllColors() {
-        Arrays.stream(this.getComponents()).forEach(component -> {
-            component.setBackground(this.trackColor);
-        });
+        Arrays.stream(this.getComponents()).forEach(component -> component.setBackground(this.trackColor));
         this.horses.forEach(horse -> {
             try {
 
-                horse.setFence(ImageIO.read(new File(String.format("./Part 2/sprites/fences/%s_fence.png", Main.getRaceUI().getCustomization().getChosenFenceColor()))));
-                horse.setSprite(ImageIO.read(new File(String.format("./Part 2/sprites/horse/%s-%s-horse.png", Main.getRaceUI().getCustomization().getChosenBreedColor(), Main.getRaceUI().getCustomization().getChosenHorseManeColor()))));
+                horse.setFence(ImageIO.read(new File(String.format("./sprites/fences/%s_fence.png", Main.getRaceUI().getCustomization().getChosenFenceColor()))));
+                horse.setSprite(ImageIO.read(new File(String.format("./sprites/horse/%s-%s-horse.png", Main.getRaceUI().getCustomization().getChosenBreedColor(), Main.getRaceUI().getCustomization().getChosenHorseManeColor()))));
 
             } catch (IOException e) {
                 e.printStackTrace();

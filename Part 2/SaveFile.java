@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -13,9 +14,9 @@ public class SaveFile implements Serializable {
     public void save(File saveFile) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(saveFile);
-            ObjectOutputStream os = new ObjectOutputStream(fileOutputStream);
-            os.writeObject(this);
-            os.close();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(this);
+            objectOutputStream.close();
             fileOutputStream.close();
 
 
@@ -27,13 +28,15 @@ public class SaveFile implements Serializable {
     public void load(File saveFile) {
         try {
             FileInputStream fileInputStream = new FileInputStream(saveFile);
-            ObjectInputStream os = new ObjectInputStream(fileInputStream);
-            SaveFile save = (SaveFile) os.readObject();
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            SaveFile save = (SaveFile) objectInputStream.readObject();
             this.balance = save.balance;
             this.horses = save.horses;
-            os.close();
+            objectInputStream.close();
             fileInputStream.close();
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch(ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

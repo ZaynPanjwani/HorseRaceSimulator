@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.io.File;
 import java.util.concurrent.Executors;
@@ -16,6 +17,8 @@ public class RaceUI extends JFrame {
     private Leaderboard leaderboard;
 
     private JPanel bottom;
+
+    private JLabel balance;
 
     private int horsesInRace;
 
@@ -59,14 +62,23 @@ public class RaceUI extends JFrame {
         this.add(horseStatus, BorderLayout.EAST);
         this.add(horseLanes, BorderLayout.WEST);
         bottom.add(customization, BorderLayout.WEST);
+
+        JPanel bottomRightCorner = new JPanel();
+
+        bottomRightCorner.setLayout(new GridLayout(2, 1));
+
         leaderboard = new Leaderboard();
 
-        bottom.add(leaderboard, BorderLayout.EAST);
+        bottomRightCorner.add(leaderboard);
+        balance = new JLabel("Balance: Loading balance...", SwingConstants.CENTER);
+        bottomRightCorner.add(balance);
+
+        bottom.add(bottomRightCorner, BorderLayout.EAST);
         this.add(bottom, BorderLayout.SOUTH);
 
 
         handleResize();
-
+        this.updateBalance();
     }
 
 
@@ -98,7 +110,6 @@ public class RaceUI extends JFrame {
         this.resetRace();
         this.customization.disableAllComponents();
 
-        this.gameState.balance -= this.horseStatus.getTotalAmountBet();
 
         executor = Executors.newSingleThreadScheduledExecutor();
 
@@ -114,6 +125,8 @@ public class RaceUI extends JFrame {
     public void stopRace() {
         executor.shutdown();
         horseStatus.updateOdds();
+        this.horseLanes.getHorses().forEach(horse -> horse.setAmountBet(0));
+        this.horseLanes.getHorses().forEach(horse -> horseStatus.updateHorse(horse));
         this.customization.enableAllComponents();
     }
 
@@ -147,7 +160,16 @@ public class RaceUI extends JFrame {
         this.gameState.save(saveFile);
     }
 
+    public void setGameState(SaveFile gameState) {
+        this.gameState = gameState;
+    }
+
     public void loadGame(File saveFile) {
         this.gameState.load(saveFile);
+        this.updateBalance();
+    }
+
+    public void updateBalance() {
+        balance.setText(String.format("Balance: $%s", getGameState().balance));
     }
 }

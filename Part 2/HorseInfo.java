@@ -15,6 +15,11 @@ public class HorseInfo implements Serializable {
         return ((double) this.getTotalDistanceTravelled())/((double) this.getTicksSurvived());
     }
 
+    public double getWinRate() {
+        double winRate = ((double)this.numOfWins)/((double) this.numOfWins+this.numOfLoss);
+        return Double.isNaN(winRate) ? 1.0 : winRate;
+    }
+
     public int getTicksSurvived() {
         return Math.max(1, this.ticksSurvived);
     }

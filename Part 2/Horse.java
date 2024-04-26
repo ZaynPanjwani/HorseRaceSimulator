@@ -19,12 +19,14 @@ public class Horse extends Canvas {
     private Image sprite;
 
     private Image fence;
+    private Image finishLine;
 
     public Horse(HorseInfo info) {
         super();
         try {
-            this.sprite = ImageIO.read(new File("/Users/zaynpanjwani/Desktop/HorseRace Starter/Part 2/sprites/horse/beige-lightbrown-horse.png"));
-            this.fence = ImageIO.read(new File("/Users/zaynpanjwani/Desktop/HorseRace Starter/Part 2/sprites/fences/green_fence.png"));
+            this.finishLine = ImageIO.read(new File("./sprites/finishLine.png"));
+            this.sprite = ImageIO.read(new File("./sprites/horse/beige-lightbrown-horse.png"));
+            this.fence = ImageIO.read(new File("./sprites/fences/green_fence.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,8 +77,10 @@ public class Horse extends Canvas {
                 if(Main.getRaceUI().getLeaderboard().addEntry(this) == 1) {
                     this.getHorseInfo().setConfidence(this.getHorseInfo().getConfidence()+0.1);
                     double multiplier = 2-getOdds();
+                    this.getHorseInfo().setNumOfWins(this.getHorseInfo().getNumOfWins()+1);
                     int moneyToCredit = (int) (this.getAmountBet()*multiplier);
                     Main.getRaceUI().getGameState().balance+=moneyToCredit;
+                    Main.getRaceUI().updateBalance();
                 }
                 this.amountBet = 0;
                 Main.getRaceUI().getHorseStatus().updateHorse(this);
@@ -97,6 +101,8 @@ public class Horse extends Canvas {
         this.paint(this.getGraphics());
     }
 
+
+
     public int getAmountBet() {
         return amountBet;
     }
@@ -110,6 +116,9 @@ public class Horse extends Canvas {
 
         for(int i = 0; i<this.getWidth(); i+=(fence.getWidth(null)-15)) {
             g.drawImage(fence, i, 50, null);
+        }
+        for(int i = 0; i<this.getHeight(); i+=100) {
+            g.drawImage(finishLine, this.getWidth()-75, i, null);
         }
 
         if(!this.fallen) {

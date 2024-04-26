@@ -72,7 +72,7 @@ public class Settings extends JPanel {
                 new Color(120, 172, 255),
                 new Color(180, 196, 63)
         };
-        for(Color trackColor : trackColors) {
+        for (Color trackColor : trackColors) {
             JButton trackColorButton = new JButton();
             trackColorButton.addActionListener(e -> {
                 Main.getRaceUI().getHorseLanes().setTrackColor(trackColor);
@@ -102,6 +102,7 @@ public class Settings extends JPanel {
             int index = i;
             breedColorButton.addActionListener(e -> {
                 switch(index) {
+
                     case 0:
                         chosenBreedColor = "beige";
                         break;
@@ -251,6 +252,66 @@ public class Settings extends JPanel {
         }
         this.add(horseManeColorGrid);
 
+    }
+
+    public void setChosenBreedColor(int index) {
+        switch(index) {
+
+            case 0:
+                chosenBreedColor = "beige";
+                break;
+            case 1:
+                chosenBreedColor = "cream";
+                break;
+            case 2:
+                chosenBreedColor = "darkbrown";
+                break;
+            case 3:
+                chosenBreedColor = "white";
+                break;
+        }
+        Main.getRaceUI().getHorseLanes().updateAllColors();
+    }
+
+    public void setChosenHorseManeColor(int horseMane) {
+        switch(horseMane) {
+            case 0:
+                chosenHorseManeColor = "darkbrown";
+                break;
+            case 1:
+                chosenHorseManeColor = "grey";
+                break;
+            case 2:
+                chosenHorseManeColor = "lightbrown";
+                break;
+            case 3:
+                chosenHorseManeColor = "maroon";
+        }
+        Main.getRaceUI().getHorseLanes().updateAllColors();
+    }
+
+    public void setChosenFenceColor(int fenceColor) {
+        switch(fenceColor) {
+            case 0:
+                chosenFenceColor = "blue";
+                break;
+            case 1:
+                chosenFenceColor = "green";
+                break;
+            case 2:
+                chosenFenceColor = "orange";
+                break;
+            case 3:
+                chosenFenceColor = "pink";
+                break;
+            case 4:
+                chosenFenceColor = "purple";
+                break;
+            case 5:
+                chosenFenceColor = "yellow";
+                break;
+        }
+        Main.getRaceUI().getHorseLanes().updateAllColors();
     }
 
     public void disableAllComponents() {
