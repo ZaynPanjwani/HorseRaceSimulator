@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.Arrays;
 
 public class Settings extends JPanel {
@@ -123,7 +124,37 @@ public class Settings extends JPanel {
 
         this.add(breedColorGrid); // (4,3)
 
-        this.add(new JLabel("Bet here"));
+        //replacing with the save/load btns
+        JPanel saveLoadButtons = new JPanel();
+        saveLoadButtons.setLayout(new GridLayout(2,1));
+
+        JButton save = new JButton("save");
+        save.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
+            fileChooser.showSaveDialog(this);
+
+            File chosenFile = fileChooser.getSelectedFile();
+            if(chosenFile != null) {
+                //save here
+            }
+        });
+
+        JButton load = new JButton("load");
+        load.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+            fileChooser.showOpenDialog(this);
+
+            File chosenFile = fileChooser.getSelectedFile();
+            if(chosenFile != null && chosenFile.exists() && chosenFile.canRead()) {
+                //load here
+            }
+        });
+
+        saveLoadButtons.add(save);
+        saveLoadButtons.add(load);
+        this.add(saveLoadButtons);
 
 
         this.add(new JLabel("Fence Color")); // (3,2)
