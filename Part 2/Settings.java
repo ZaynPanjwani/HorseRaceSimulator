@@ -190,10 +190,25 @@ public class Settings extends JPanel {
                 new Color(0, 255, 0),
                 new Color(200,255,0)
         };
-        for(Color horseManeColor : horseManeColors) {
+        for(int i = 0; i< horseManeColors.length; i++) {
+            Color horseManeColor = horseManeColors[i];
             JButton horseManeColorButton = new JButton();
+            int chosenColorIndex = i;
             horseManeColorButton.addActionListener(e -> {
-                //set color from here
+                switch(chosenColorIndex) {
+                    case 0:
+                        chosenHorseManeColor = "darkbrown";
+                        break;
+                    case 1:
+                        chosenHorseManeColor = "grey";
+                        break;
+                    case 2:
+                        chosenHorseManeColor = "lightbrown";
+                        break;
+                    case 3:
+                        chosenHorseManeColor = "maroon";
+                }
+                Main.getRaceUI().getHorseLanes().updateAllColors();
             });
             horseManeColorButton.setBackground(horseManeColor);
             horseManeColorButton.setForeground(horseManeColor);
