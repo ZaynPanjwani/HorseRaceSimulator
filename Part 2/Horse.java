@@ -9,6 +9,7 @@ public class Horse extends Canvas {
 
 
     private boolean broadcast = false;
+    private int amountBet;
     private int distanceTravelled = 0;
     private HorseInfo horseInfo;
     private boolean fallen;
@@ -68,6 +69,7 @@ public class Horse extends Canvas {
                 broadcast=true;
                 if(Main.getRaceUI().getLeaderboard().addEntry(this) == 1) {
                     this.getHorseInfo().setConfidence(this.getHorseInfo().getConfidence()+0.1);
+
                 }
                 Main.getRaceUI().getHorseStatus().updateHorse(this);
                 Main.getRaceUI().horseFinished();
@@ -83,8 +85,17 @@ public class Horse extends Canvas {
 
         this.distanceTravelled = 0;
         this.fallen = false;
+        this.amountBet = 0;
         this.broadcast = false;
         this.paint(this.getGraphics());
+    }
+
+    public int getAmountBet() {
+        return amountBet;
+    }
+
+    public void setAmountBet(int amountBet) {
+        this.amountBet = amountBet;
     }
 
     public void paint(Graphics g) {

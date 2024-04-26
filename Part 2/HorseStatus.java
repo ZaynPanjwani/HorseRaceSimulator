@@ -22,7 +22,7 @@ public class HorseStatus extends JPanel {
         OddsCalculator.calculateOdds(this.horses);
         for(Horse horse : this.horses) {
             JPanel horseStatus = new JPanel();
-            horseStatus.setLayout(new GridLayout(3, 2));
+            horseStatus.setLayout(new GridLayout(4, 2));
             horseStatus.add(new JLabel("Name: " + horse.getHorseInfo().getName()));
             horseStatus.add(new JLabel("Confidence: " + horse.getHorseInfo().getConfidence()));
             horseStatus.add(new JLabel(String.format("Odds: %.2f", horse.getOdds())));
@@ -38,6 +38,7 @@ public class HorseStatus extends JPanel {
                     Integer bet = Integer.parseInt(bettingAmount.getText());
                     if(bet <= 0) throw new NumberFormatException();
                     amountBet.addAndGet(bet);
+                    horse.setAmountBet(amountBet.get());
                     amountBetLabel.setText(String.format("Bet: $%s", amountBet));
                 } catch(NumberFormatException ignored) {
                     System.out.println("exception found, handle it by showing in a dialogue");
@@ -48,6 +49,13 @@ public class HorseStatus extends JPanel {
             horseStatus.add(bettingAmount);
 
             horseStatus.add(betOnHorse);
+
+            JButton viewStats = new JButton("View horse stats");
+
+            viewStats.addActionListener(e -> new HorseStats(horse.getHorseInfo()));
+
+
+            horseStatus.add(viewStats);
 
             this.add(horseStatus);
 
