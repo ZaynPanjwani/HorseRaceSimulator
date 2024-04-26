@@ -84,6 +84,7 @@ public class Horse extends Canvas {
         this.distanceTravelled = 0;
         this.fallen = false;
         this.broadcast = false;
+        this.paint(this.getGraphics());
     }
 
     public void paint(Graphics g) {
