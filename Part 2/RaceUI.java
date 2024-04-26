@@ -97,11 +97,18 @@ public class RaceUI extends JFrame {
     public void startRace() {
         this.resetRace();
         this.customization.disableAllComponents();
+
+        this.gameState.balance -= this.horseStatus.getTotalAmountBet();
+
         executor = Executors.newSingleThreadScheduledExecutor();
 
         horsesInRace = getHorseLanes().getHorses().size();
 
         executor.scheduleAtFixedRate(horseLanes::tickAllHorses, 100, 16, TimeUnit.MILLISECONDS);
+    }
+
+    public boolean isRaceRunning() {
+        return executor != null && !executor.isShutdown();
     }
 
     public void stopRace() {

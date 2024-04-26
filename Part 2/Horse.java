@@ -14,6 +14,8 @@ public class Horse extends Canvas {
     private HorseInfo horseInfo;
     private boolean fallen;
     private double odds;
+
+    private double oddsAtStart;
     private Image sprite;
 
     private Image fence;
@@ -60,6 +62,9 @@ public class Horse extends Canvas {
 
     public void setOdds(double odds) {
         this.odds = odds;
+        if(!Main.getRaceUI().isRaceRunning()) {
+            this.oddsAtStart = odds;
+        }
     }
 
     public boolean hasFinished() {
@@ -69,8 +74,11 @@ public class Horse extends Canvas {
                 broadcast=true;
                 if(Main.getRaceUI().getLeaderboard().addEntry(this) == 1) {
                     this.getHorseInfo().setConfidence(this.getHorseInfo().getConfidence()+0.1);
-
+                    double multiplier = 2-getOdds();
+                    int moneyToCredit = (int) (this.getAmountBet()*multiplier);
+                    Main.getRaceUI().getGameState().balance+=moneyToCredit;
                 }
+                this.amountBet = 0;
                 Main.getRaceUI().getHorseStatus().updateHorse(this);
                 Main.getRaceUI().horseFinished();
             }
@@ -85,7 +93,6 @@ public class Horse extends Canvas {
 
         this.distanceTravelled = 0;
         this.fallen = false;
-        this.amountBet = 0;
         this.broadcast = false;
         this.paint(this.getGraphics());
     }

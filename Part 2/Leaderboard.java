@@ -9,7 +9,7 @@ public class Leaderboard extends JPanel {
         BoxLayout boxLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         this.setLayout(boxLayout);
-        this.setSize(new Dimension((int) (Main.getRaceUI().getWidth()*0.2), Main.getRaceUI().getHeight()));
+        this.setSize(new Dimension((int) (Main.getRaceUI().getWidth()*0.2), (int) (Main.getRaceUI().getHeight()*0.3)));
         this.setForeground(Color.BLACK);
 
         JLabel positions = new JLabel("Leaderboard");

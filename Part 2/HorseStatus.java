@@ -5,11 +5,23 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class HorseStatus extends JPanel {
     private ArrayList<Horse> horses;
+
+    private AtomicInteger totalAmountBet;
+
     public HorseStatus() {
         super();
+        this.totalAmountBet = new AtomicInteger(0);
         this.setPreferredSize(new Dimension((int) (this.getWidth()*0.2), (int) (this.getHeight()*0.7)));
         this.setBackground(Color.BLUE);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    }
+
+    public int getTotalAmountBet() {
+        return totalAmountBet.get();
+    }
+
+    public void setTotalAmountBet(AtomicInteger totalAmountBet) {
+        this.totalAmountBet = totalAmountBet;
     }
 
     public void updateLanes() {
@@ -37,9 +49,11 @@ public class HorseStatus extends JPanel {
                 try {
                     Integer bet = Integer.parseInt(bettingAmount.getText());
                     if(bet <= 0) throw new NumberFormatException();
-                    amountBet.addAndGet(bet);
+                    amountBet.getAndAdd(bet);
                     horse.setAmountBet(amountBet.get());
+                    totalAmountBet.getAndAdd(amountBet.get());
                     amountBetLabel.setText(String.format("Bet: $%s", amountBet));
+                    bettingAmount.setText("");
                 } catch(NumberFormatException ignored) {
                     System.out.println("exception found, handle it by showing in a dialogue");
                 }
@@ -70,6 +84,7 @@ public class HorseStatus extends JPanel {
         JPanel horseStats = (JPanel) this.getComponent(idx);
 
         ( (JLabel) horseStats.getComponent(1)).setText(String.format("Confidence: %.2f", horse.getHorseInfo().getConfidence())); //confidence
+        ( (JLabel) horseStats.getComponent(3)).setText(String.format("Bet: $%s", horse.getAmountBet())); //Amount bet
         this.repaint();
     }
 
