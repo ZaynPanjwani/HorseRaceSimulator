@@ -18,8 +18,8 @@ public class Horse extends Canvas {
     public Horse() {
         super();
         try {
-            this.sprite = ImageIO.read(new File("/Users/zaynpanjwani/Desktop/HorseRace Starter/Part 2/pixil-frame-0.png"));
-            this.fence = ImageIO.read(new File("/Users/zaynpanjwani/Desktop/HorseRace Starter/Part 2/pixil-frame-0 19.png"));
+            this.sprite = ImageIO.read(new File("/Users/zaynpanjwani/Desktop/HorseRace Starter/Part 2/sprites/horse/beige-lightbrown-horse.png"));
+            this.fence = ImageIO.read(new File("/Users/zaynpanjwani/Desktop/HorseRace Starter/Part 2/sprites/fences/green_fence.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,6 +97,16 @@ public class Horse extends Canvas {
             fall();
             this.paint(this.getGraphics());
         }
+    }
+
+    public void setSprite(Image sprite) {
+        this.sprite = sprite;
+        this.paint(this.getGraphics());
+    }
+
+    public void setFence(Image fence) {
+        this.fence = fence;
+        this.paint(this.getGraphics());
     }
 
     public void moveHorse() {

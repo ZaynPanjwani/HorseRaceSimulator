@@ -1,5 +1,8 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HorseLanes extends JPanel {
@@ -43,6 +46,19 @@ public class HorseLanes extends JPanel {
 
     public void resetHorses() {
         this.horses.forEach(Horse::resetHorse);
+    }
+
+    public void updateAllColors() {
+        this.horses.forEach(horse -> {
+            try {
+
+                horse.setFence(ImageIO.read(new File(String.format("./Part 2/sprites/fences/%s_fence.png", Main.getRaceUI().getCustomization().getChosenFenceColor()))));
+                horse.setSprite(ImageIO.read(new File(String.format("./Part 2/sprites/horse/%s-%s-horse.png", Main.getRaceUI().getCustomization().getChosenBreedColor(), Main.getRaceUI().getCustomization().getChosenHorseManeColor()))));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public ArrayList<Horse> getHorses() {

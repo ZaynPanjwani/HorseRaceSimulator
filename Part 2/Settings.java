@@ -6,6 +6,13 @@ public class Settings extends JPanel {
 
     private JComboBox<Integer> numberOfLanes;
 
+    private String chosenFenceColor = "green";
+
+    private String chosenBreedColor = "beige";
+
+    private String chosenHorseManeColor = "maroon";
+
+
     public Settings() {
         super();
         GridLayout mainGridLayout = new GridLayout(4, 3);
@@ -86,10 +93,27 @@ public class Settings extends JPanel {
                 new Color(107, 11, 11),
                 new Color(0,0,0)
         };
-        for(Color breedColor : breedColors){
+        for(int i = 0; i< breedColors.length; i++){
+            Color breedColor = breedColors[i];
             JButton breedColorButton = new JButton();
+
+            int index = i;
             breedColorButton.addActionListener(e -> {
-                //set color from here
+                switch(index) {
+                    case 0:
+                        chosenBreedColor = "beige";
+                        break;
+                    case 1:
+                        chosenBreedColor = "cream";
+                        break;
+                    case 2:
+                        chosenBreedColor = "darkbrown";
+                        break;
+                    case 3:
+                        chosenBreedColor = "white";
+                        break;
+                }
+                Main.getRaceUI().getHorseLanes().updateAllColors();
             });
             breedColorButton.setBackground(breedColor);
             breedColorButton.setForeground(breedColor);
@@ -99,34 +123,62 @@ public class Settings extends JPanel {
 
         this.add(breedColorGrid); // (4,3)
 
+        this.add(new JLabel("Bet here"));
 
-        this.add(new JLabel("Uniform Color")); // (3,2)
-        this.add(new JLabel("Horse Equipment Color"));
 
-        this.add(new JLabel(""));
+        this.add(new JLabel("Fence Color")); // (3,2)
+        this.add(new JLabel("Horse Mane Color"));
 
-        JPanel uniformColorGrid = new JPanel();
-        uniformColorGrid.setLayout((new GridLayout(2,3)));
-        Color[] uniformColors = new Color[] {
-                new Color(255,0,0),
+        JButton reset = new JButton("Reset");
+
+        reset.addActionListener(e -> Main.getRaceUI().resetRace());
+
+        this.add(reset);
+
+        JPanel fenceColorGrid = new JPanel();
+        fenceColorGrid.setLayout((new GridLayout(2,3)));
+        Color[] fenceColors = new Color[] {
+                new Color(0,0,0),
                 new Color(0, 115, 255),
                 new Color(0, 255, 0),
                 new Color(200,255,0),
                 new Color(255,0,180),
                 new Color(150,0,255)
         };
-        for(Color uniformColor : uniformColors){
-            JButton uniformColorButton = new JButton();
-            uniformColorButton.addActionListener(e -> {
-                //set color from here
+        for(int i = 0; i<fenceColors.length; i++){
+            Color fenceColor = fenceColors[i];
+            JButton fenceColorButton = new JButton();
+            int index = i;
+            fenceColorButton.addActionListener(e -> {
+                switch(index) {
+                    case 0:
+                        chosenFenceColor = "blue";
+                        break;
+                    case 1:
+                        chosenFenceColor = "green";
+                        break;
+                    case 2:
+                        chosenFenceColor = "orange";
+                        break;
+                    case 3:
+                        chosenFenceColor = "pink";
+                        break;
+                    case 4:
+                        chosenFenceColor = "purple";
+                        break;
+                    case 5:
+                        chosenFenceColor = "yellow";
+                        break;
+                }
+                Main.getRaceUI().getHorseLanes().updateAllColors();
             });
-            uniformColorButton.setBackground(uniformColor);
-            uniformColorButton.setForeground(uniformColor);
-            uniformColorButton.setOpaque(true);
-            uniformColorGrid.add(uniformColorButton);
+            fenceColorButton.setBackground(fenceColor);
+            fenceColorButton.setForeground(fenceColor);
+            fenceColorButton.setOpaque(true);
+            fenceColorGrid.add(fenceColorButton);
         }
 
-        this.add(uniformColorGrid); // (4,3)
+        this.add(fenceColorGrid); // (4,3)
         // (4,2)
 
         // horse color here
@@ -136,9 +188,7 @@ public class Settings extends JPanel {
                 new Color(255,0,0),
                 new Color(0, 115, 255),
                 new Color(0, 255, 0),
-                new Color(200,255,0),
-                new Color(255,0,180),
-                new Color(150,0,255)
+                new Color(200,255,0)
         };
         for(Color horseManeColor : horseManeColors) {
             JButton horseManeColorButton = new JButton();
@@ -161,5 +211,17 @@ public class Settings extends JPanel {
     public void enableAllComponents() {
         numberOfLanes.setEnabled(true);
         Arrays.stream(this.getComponents()).forEach(c -> c.setEnabled(true));
+    }
+
+    public String getChosenFenceColor() {
+        return chosenFenceColor;
+    }
+
+    public String getChosenBreedColor() {
+        return chosenBreedColor;
+    }
+
+    public String getChosenHorseManeColor() {
+        return chosenHorseManeColor;
     }
 }

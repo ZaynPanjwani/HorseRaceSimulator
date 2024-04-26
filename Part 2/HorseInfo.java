@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-import java.util.Objects;
+import java.io.Serializable;
 import java.util.Random;
-import java.util.random.*;
 
-public class HorseInfo {
+public class HorseInfo implements Serializable {
     private String name;
     private double confidence;
     private String breed;

@@ -16,8 +16,6 @@ public class RaceUI extends JFrame {
 
     private int horsesInRace;
 
-    private boolean awardedWinner = false;
-
     private ScheduledExecutorService executor;
 
     public RaceUI() {
@@ -85,10 +83,14 @@ public class RaceUI extends JFrame {
         bottom.repaint();
     }
 
-    public void startRace() {
-        this.awardedWinner = false;
+    public void resetRace() {
         this.horseLanes.resetHorses();
         this.getLeaderboard().reset();
+
+    }
+
+    public void startRace() {
+        this.resetRace();
         this.customization.disableAllComponents();
         executor = Executors.newSingleThreadScheduledExecutor();
 
@@ -110,14 +112,6 @@ public class RaceUI extends JFrame {
 
     public Leaderboard getLeaderboard() {
         return this.leaderboard;
-    }
-
-    public boolean isAwardedWinner() {
-        return awardedWinner;
-    }
-
-    public void setAwardedWinner(boolean awardedWinner) {
-        this.awardedWinner = awardedWinner;
     }
 
     public HorseLanes getHorseLanes() {
