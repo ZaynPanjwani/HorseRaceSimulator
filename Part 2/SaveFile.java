@@ -5,6 +5,11 @@ public class SaveFile implements Serializable {
     public int balance;
     public ArrayList<HorseInfo> horses;
 
+    public SaveFile() {
+        this.balance = 1000;
+        this.horses = new ArrayList<>();
+    }
+
     public void save(File saveFile) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(saveFile);

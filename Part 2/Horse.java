@@ -2,6 +2,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Horse extends Canvas {
 
@@ -15,7 +17,7 @@ public class Horse extends Canvas {
 
     private Image fence;
 
-    public Horse() {
+    public Horse(HorseInfo info) {
         super();
         try {
             this.sprite = ImageIO.read(new File("/Users/zaynpanjwani/Desktop/HorseRace Starter/Part 2/sprites/horse/beige-lightbrown-horse.png"));
@@ -24,12 +26,31 @@ public class Horse extends Canvas {
             e.printStackTrace();
         }
         this.distanceTravelled = 0;
-        this.horseInfo = HorseInfo.generateRandom();
+        if(info == null) {
+            this.horseInfo = HorseInfo.generateRandom();
+            Main.getRaceUI().getGameState().horses.add(this.horseInfo);
+        }
+        else this.horseInfo = info;
         this.setBackground(Color.YELLOW);
         this.setForeground(Color.BLACK);
         setBackground(Color.white);
 
         this.setVisible(true);
+    }
+
+    public static ArrayList<Horse> getPregeneratedHorses(int num) {
+        ArrayList<HorseInfo> horseInfos = (ArrayList<HorseInfo>) Main.getRaceUI().getGameState().horses.clone();
+        ArrayList<Horse> horses = new ArrayList<>();
+        Random r = new Random();
+        for(int i = 0; i<num; i++) {
+            if(horseInfos.isEmpty()) {
+                horses.add(new Horse(null));
+            } else {
+                HorseInfo info = horseInfos.remove(r.nextInt(horseInfos.size()));
+                horses.add(new Horse(info));
+            }
+        }
+        return horses;
     }
 
     public double getOdds() {

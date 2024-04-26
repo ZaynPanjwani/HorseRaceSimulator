@@ -4,9 +4,12 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HorseLanes extends JPanel {
     private ArrayList<Horse> horses;
+
+    private Color trackColor = Color.WHITE;
 
 
     public HorseLanes(int numOfLanes)
@@ -25,6 +28,10 @@ public class HorseLanes extends JPanel {
 
     }
 
+    public void setTrackColor(Color trackColor) {
+        this.trackColor = trackColor;
+    }
+
     public void tickAllHorses() {
         this.horses.forEach(Horse::moveHorse);
     }
@@ -35,9 +42,9 @@ public class HorseLanes extends JPanel {
         this.revalidate();
         this.repaint();
 
-        for (int i = 0; i < numOfLanes; i++)
+        ArrayList<Horse> generatedHorses = Horse.getPregeneratedHorses(numOfLanes);
+        for (Horse horse : generatedHorses)
         {
-            Horse horse = new Horse();
             this.horses.add(horse);
             this.add(horse);
         }
@@ -49,6 +56,9 @@ public class HorseLanes extends JPanel {
     }
 
     public void updateAllColors() {
+        Arrays.stream(this.getComponents()).forEach(component -> {
+            component.setBackground(this.trackColor);
+        });
         this.horses.forEach(horse -> {
             try {
 

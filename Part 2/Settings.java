@@ -75,7 +75,8 @@ public class Settings extends JPanel {
         for(Color trackColor : trackColors) {
             JButton trackColorButton = new JButton();
             trackColorButton.addActionListener(e -> {
-                //set color from here
+                Main.getRaceUI().getHorseLanes().setTrackColor(trackColor);
+                Main.getRaceUI().getHorseLanes().updateAllColors();
             });
             trackColorButton.setBackground(trackColor);
             trackColorButton.setForeground(trackColor);
@@ -89,10 +90,10 @@ public class Settings extends JPanel {
         JPanel breedColorGrid = new JPanel();
         breedColorGrid.setLayout((new GridLayout(2,2)));
         Color[] breedColors = new Color[] {
-                new Color(105, 40, 20),
-                new Color(204, 203, 190),
-                new Color(107, 11, 11),
-                new Color(0,0,0)
+                new Color(235,181,125),
+                new Color(252,237,180),
+                new Color(44,21,3),
+                new Color(255,255,255)
         };
         for(int i = 0; i< breedColors.length; i++){
             Color breedColor = breedColors[i];
@@ -169,12 +170,12 @@ public class Settings extends JPanel {
         JPanel fenceColorGrid = new JPanel();
         fenceColorGrid.setLayout((new GridLayout(2,3)));
         Color[] fenceColors = new Color[] {
-                new Color(0,0,0),
-                new Color(0, 115, 255),
-                new Color(0, 255, 0),
-                new Color(200,255,0),
-                new Color(255,0,180),
-                new Color(150,0,255)
+                new Color(7,0,242),
+                new Color(119,251,76),
+                new Color(240,151,45),
+                new Color(234,51,247),
+                new Color(171,35,246),
+                new Color(254,247,82)
         };
         for(int i = 0; i<fenceColors.length; i++){
             Color fenceColor = fenceColors[i];
@@ -216,10 +217,10 @@ public class Settings extends JPanel {
         JPanel horseManeColorGrid = new JPanel();
         horseManeColorGrid.setLayout((new GridLayout(2,2)));
         Color[] horseManeColors = new Color[] {
-                new Color(255,0,0),
-                new Color(0, 115, 255),
-                new Color(0, 255, 0),
-                new Color(200,255,0)
+                new Color(82,39,10),
+                new Color(70,70,70),
+                new Color(156,97,69),
+                new Color(133,32,26)
         };
         for(int i = 0; i< horseManeColors.length; i++) {
             Color horseManeColor = horseManeColors[i];

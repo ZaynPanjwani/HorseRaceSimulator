@@ -30,6 +30,7 @@ public class HorseInfo implements Serializable {
         this.breed = breed;
     }
 
+
     public static HorseInfo generateRandom() {
         Random random = new Random();
         String[] firstNames = {"Thunder",  "Shadow", "Spirit", "Midnight", "Whisper", "Starlight", "Storm", "Blaze", "Dusty", "Sunny"};
