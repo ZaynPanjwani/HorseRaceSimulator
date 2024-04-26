@@ -138,6 +138,7 @@ public class Settings extends JPanel {
             File chosenFile = fileChooser.getSelectedFile();
             if(chosenFile != null) {
                 Main.getRaceUI().saveGame(chosenFile);
+
             }
         });
 
@@ -150,6 +151,7 @@ public class Settings extends JPanel {
             File chosenFile = fileChooser.getSelectedFile();
             if(chosenFile != null && chosenFile.exists() && chosenFile.canRead()) {
                 Main.getRaceUI().loadGame(chosenFile);
+                Main.getRaceUI().getHorseLanes().updateLanes(this.numberOfLanes.getSelectedIndex()+2);
             }
         });
 
